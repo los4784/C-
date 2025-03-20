@@ -1,0 +1,131 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Week02Proj01
+{
+private void btnOutput07_Click(object sender, EventArgs e)
+{
+      //관계연산자 (비교)
+      bool result1 = (tbxInput1.Text == tbxInput2.Text);
+      bool result2 = (tbxInput2.Text == tbxInput3.Text);
+      bool result3 = (tbxInput1.Text == tbxInput3.Text);
+  
+      //논리연산자 이용
+      if (result1 && result2 && result3) // 텍스트 박스가 모두 다 일치할때
+      {
+          lblResult.Text = "모두 일치";
+      }
+      else if (result1 || result2 || result3) // 두개라도 같은게 있는지
+      {
+          lblResult.Text = "적어도 일치하는 데이터가 있음";
+      }
+      else
+      {
+          lblResult.Text = "모두 불일치";
+      }
+  }
+  
+  private void btnOutput08_Click(object sender, EventArgs e)
+  {
+      var data1 = int.Parse(tbxInput1.Text); // tbxInput1 텍스트 박스에서 입력된 문자열을 정수로 변환하여 data1에 저장
+      var data2 = int.Parse(tbxInput2.Text); // var 변수의 타입을 자동으로 추론한다, Parse 데이터 타입을 변환시킴 지금은 tbx를 int로
+  
+      string result; //지역변수 - 자동 초기화 지원 안함.    , // 결과를 저장할 문자열 변수 선언
+      // data1과 data2를 비교
+      if (data1 == data2) // 두 값이 같으면
+      {
+          result = "같아요";   // 결과에 "같아요" 저장
+      }
+      else if (data1 < data2)
+      {
+          result = "뒤가 커요";
+      }
+      else // if (data1 > data2) 
+      {
+          result = "앞이 커요";
+      }
+  
+      lblResult.Text = result; // lblResult 텍스트에 결과 문자열 할당
+  }
+  
+  private void btnOutput09_Click(object sender, EventArgs e)
+  {
+      lblResult.Text = int.MinValue.ToString() + "\r\n";
+      lblResult.Text = int.MaxValue.ToString() + "\r\n";
+      lblResult.Text = Environment.NewLine;
+      lblResult.Text += uint.MinValue.ToString() + "\r\n";
+      lblResult.Text += uint.MaxValue.ToString() + "\r\n";
+      lblResult.Text = Environment.NewLine;
+      //고정소수점형
+      lblResult.Text += decimal.MinValue.ToString() + "\n";
+      lblResult.Text += decimal.MaxValue.ToString() + "\n";
+  }
+  
+  private void btnOutput10_Click(object sender, EventArgs e)
+  {
+      //배열 array
+      //TextBox[] textBoxes = new TextBox[5];
+      TextBox[] textBoxes; //배열변수 선언 , 이건 배열이 아님 이유 : 고정크기가 안정해져있어서
+      textBoxes = new TextBox[5]; //배열생성 후 위치를 변수에 넘긴다.
+  
+      textBoxes[0] = tbxInput1;
+      textBoxes[1] = tbxInput2;
+      textBoxes[2] = tbxInput3;
+      textBoxes[3] = tbxInput4;
+      textBoxes[4] = tbxInput5;
+  
+      //객체지향 특징 : class
+      //자료형 class(or struct) 로 만듬.
+      //class = (값 + metadata) + 기능
+      int sum = 0;
+      // for (int i = 0; i <5; i++)
+      for (int i = 0; i < textBoxes.Length; i++) //textBoxes.Length 구지 배열 크기 안잡아도 괜찮음
+      {
+          if (textBoxes[i].Text != null && textBoxes[i].Text.Trim() != "") //값이 할당 안되어 있으면 null로 한다, Trim은 양쪽 공백이 사라진다
+          {
+              sum += int.Parse(textBoxes[i].Text);
+          }
+      }
+  
+      lblResult.Text = "총 합:" + sum;
+  }
+  
+  private void btnOutput11_Click(object sender, EventArgs e)
+  {
+      //배열 array
+      //TextBox[] textBoxes = new TextBox[5];
+      TextBox[] textBoxes; //배열변수 선언 , 이건 배열이 아님 이유 : 고정크기가 안정해져있어서
+      textBoxes = new TextBox[5]; //배열생성 후 위치를 변수에 넘긴다.
+  
+      textBoxes[0] = tbxInput1;
+      textBoxes[1] = tbxInput2;
+      textBoxes[2] = tbxInput3;
+      textBoxes[3] = tbxInput4;
+      textBoxes[4] = tbxInput5;
+  
+      //객체지향 특징 : class
+      //자료형 class(or struct) 로 만듬.
+      //class = (값 + metadata) + 기능
+      int sum = 0;
+      // for (int i = 0; i <5; i++)
+      int count = 0; //텍스트 박스에 값이 없을시에 평균을 낼때 나누는 값 설정
+      for (int i = 0; i < textBoxes.Length; i++) //textBoxes.Length 구지 배열 크기 안잡아도 괜찮음
+      {
+          if (textBoxes[i].Text != null && textBoxes[i].Text.Trim() != "") //값이 할당 안되어 있으면 null로 한다, Trim은 양쪽 공백이 사라진다
+          {
+              sum += int.Parse(textBoxes[i].Text);
+              count++;
+          }
+      }
+  
+      lblResult.Text = "평균:" + (sum/ count);
+  }
+}
